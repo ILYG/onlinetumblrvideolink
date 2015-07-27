@@ -32,12 +32,17 @@ if __name__ == '__main__':
     total_page = int(raw_input("Please Input Total Page : "))
     aa = find_url(url=url)
     bb = map(find_video,aa)
-    with open(r'./list.txt','w') as f:
-        for i in bb:
-            if i[-3:] == '480' or i[-3:] == '720':
-                i = i[:-3]+'1080'
-                f.write(i+'\n')
-            else:
-                i = i + r'/1080'
-                f.write(i+'\n')
+    url1 = []
+    for i in bb:
+        if i[-3:] == '480' or i[-3:] == '720':
+            i = i[:-3]+'1080'
+            url1.append(i)
+        else:
+            i = i + r'/1080'
+            url1.append(i)
+    with open("./list.txt","w") as f:
+        for i in url1:
+            r = rq.get(i)
+            f.write(r.url)
+
     print 'Total Video Is ' + str(len(bb)) + '\n ByeBye!'
