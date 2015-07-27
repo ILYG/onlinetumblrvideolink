@@ -27,6 +27,13 @@ def find_video(addr):
     else:
         return page.find('source').get('src')
 
+def find_304(first_url):
+    if first_url is not (None or ''):
+        r = rq.get(first_url)
+        return r.url
+    else:
+        return ''
+
 if __name__ == '__main__':
     url = raw_input("Please Input URL : ")
     total_page = int(raw_input("Please Input Total Page : "))
@@ -40,9 +47,9 @@ if __name__ == '__main__':
         else:
             i = i + r'/1080'
             url1.append(i)
+    url2 = map(find_304,url1)
     with open("./list.txt","w") as f:
-        for i in url1:
-            r = rq.get(i)
-            f.write(r.url)
+        for j in url2:
+            f.write(j+'\n')
 
     print 'Total Video Is ' + str(len(bb)) + '\n ByeBye!'
