@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup as bs
 
 def find_url(url):
     temp = []
-    for i in range(1,50):
+    for i in range(1,total_page):
         addrs = url + 'page/' + str(i)
         p = rq.get(addrs).text
         l1 = re.findall('tumblr_video_container_\d*',p)
@@ -29,6 +29,7 @@ def find_video(addr):
 
 if __name__ == '__main__':
     url = raw_input("Please Input URL : ")
+    total_page = int(raw_input("Please Input Total Page : "))
     aa = find_url(url=url)
     bb = map(find_video,aa)
     with open(r'./list.txt','w') as f:
