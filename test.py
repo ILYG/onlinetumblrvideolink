@@ -42,14 +42,15 @@ if __name__ == '__main__':
     url1 = []
     for i in bb:
         if i[-3:] == '480' or i[-3:] == '720':
-            i = i[:-3]+'1080'
+            i = i[:-4]
             url1.append(i)
-        else:
-            i = i + r'/1080'
+        elif i[-4:] == '1080':
+            i = i[:-5]
             url1.append(i)
-    url2 = map(find_304,url1)
-    with open("./list.txt","w") as f:
-        for j in url2:
-            f.write(j+'\n')
+    for i in url1:
+        print i
+    #with open("./list.txt","w") as f:
+    #    for j in url2:
+    #        f.write(j+'\n')
 
     print 'Total Video Is ' + str(len(bb)) + '\n ByeBye!'
