@@ -21,18 +21,12 @@ def find_url(url):
 
 def find_video(addr):
     addres = 'http://www.tumblr.com/video/' + re.findall('/\/\w*\.',url)[0][2:-1] + '/' + addr + '/1366/'
-    page = bs(rq.get(addres).text)
+    page = bs(rq.get(addres).text,"lxml")
     if page.find('source') == None:
         return ''
     else:
         return page.find('source').get('src')
 
-def find_304(first_url):
-    if first_url is not (None or ''):
-        r = rq.get(first_url)
-        return r.url
-    else:
-        return ''
 
 if __name__ == '__main__':
     url = raw_input("Please Input URL : ")
@@ -47,10 +41,9 @@ if __name__ == '__main__':
         elif i[-4:] == '1080':
             i = i[:-5]
             url1.append(i)
-    for i in url1:
-        print i
-    #with open("./list.txt","w") as f:
-    #    for j in url2:
-    #        f.write(j+'\n')
 
-    print 'Total Video Is ' + str(len(bb)) + '\n ByeBye!'
+    with open("./list.txt","w") as f:
+        for j in url1:
+            f.write("http://vt.tumblr.com/" + j[-24:] + ".mp4#_=_" + "\n")
+
+    print 'Total Video Is ' + str(len(url1)) + '\n ByeBye!'
