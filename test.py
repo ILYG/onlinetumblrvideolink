@@ -33,10 +33,17 @@ if __name__ == '__main__':
     total_page = int(raw_input("Please Input Total Page : "))
     aa = find_url(url=url)
     bb = map(find_video,aa)
-
+    url1 = []
+    for i in bb:
+        if i[-4:] == ('/480' or '/720'):
+            url1.append(i[:-4])
+        elif ip[-5:] == '/1080':
+            url1.append(i[:-5])
+        else:
+            url1.append(i)
 
     with open("./list.txt","w") as f:
-        for j in bb:
+        for j in url1:
             f.write("http://vt.tumblr.com/" + j[-24:] + ".mp4#_=_" + "\n")
 
     print 'Total Video Is ' + str(len(url1)) + '\n ByeBye!'
