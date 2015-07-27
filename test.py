@@ -37,7 +37,7 @@ if __name__ == '__main__':
     for i in bb:
         if i[-4:] == ('/480' or '/720'):
             url1.append(i[:-4])
-        elif ip[-5:] == '/1080':
+        elif i[-5:] == '/1080':
             url1.append(i[:-5])
         else:
             url1.append(i)
